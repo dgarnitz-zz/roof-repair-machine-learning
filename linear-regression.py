@@ -1,23 +1,18 @@
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LinearRegression
-from sklearn.preprocessing import PolynomialFeatures, StandardScaler
+from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_validate
-from sklearn.model_selection import cross_val_score, GridSearchCV, KFold
-from sklearn.pipeline import Pipeline 
+import pickle
 
-# Use this to export the model
-#https://machinelearningmastery.com/save-load-machine-learning-models-python-scikit-learn/
 
 #load data
-# data = pd.read_csv('./regression-training-data/TestPriceData.csv', header=None)
-data = pd.read_excel('./regression-training-data/PriceData.xlsx', sheet_name='SimpleData', header=None)
-# data_values = data.values
+data = pd.read_excel('./regression-training-data/PriceData.xlsx', sheet_name='SeasonalData', header=None)
 
 #extract data 
-X = data.iloc[1:,2:10]
+X = data.iloc[1:,2:14]
 y = data.iloc[1:,0]
 
 #remove the training set 
@@ -52,44 +47,16 @@ print(cv)
                     # want to underestimate as often as you overestimate
                     # want to overestimate by the same amount as you underestimate
 
-# a, *cv['estimator'] = cv['estimator']
-# cv_estimator = LinearRegression(a)
+#export the model
+# Use this to export the model
+# https://machinelearningmastery.com/save-load-machine-learning-models-python-scikit-learn/
 
-# print("compared to cross val scores:")
-# y_CVprediction = cv_estimator.predict(x_test)
-# print("MSE: ")
-# print (mean_squared_error(y_test, y_CVprediction))
-# print("MAE: ")
-# print(mean_absolute_error(y_test, y_CVprediction))
-# print("R2 of the model: ")
-# print(r2_score(y_test, y_CVprediction))
+# save the model to disk
+filename = 'linear-regression.sav'
+pickle.dump(linreg, open(filename, 'wb'))
 
-# #standardize the data
-# scaler = preprocessing.StandardScaler().fit(x_train)
-
-
-# #create pipeline & grid
-# pipeline = Pipeline([('scaler', scaler), 
-#         ('polynomial', PolynomialFeatures()),
-#         ('model', linreg)])
-
-# grid = {'polynomial__degree': range(1,6),
-#         'polynomial__include_bias': ["False"]} 
-
-# #cross validation
-# clf = GridSearchCV(pipeline, param_grid = grid, cv=5, refit = True)
-
-# #fit and tune the model
-# clf.fit(x_train, y_train)
-
-#generalize on a new dataset
-# y_prediction = clf.predict(x_test)
-# print("MSE: ")
-# print (mean_squared_error(y_test, y_prediction))
-# print("MAE: ")
-# print(mean_absolute_error(y_test, y_prediction))
-# print("R2 of the model: ")
-# print(r2_score(y_test, y_prediction))
-
-# #get ideal parameters
-# print(clf.best_params_)
+ 
+# load the model from disk
+loaded_model = pickle.load(open(filename, 'rb'))
+result = loaded_model.score(x_test, y_test)
+print(result)
