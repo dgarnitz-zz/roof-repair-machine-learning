@@ -53,10 +53,13 @@ print(cv)
 
 # save the model to disk
 filename = 'linear-regression.sav'
-pickle.dump(linreg, open(filename, 'wb'))
+# pickle.dump(linreg, open(filename, 'wb'))
 
  
 # load the model from disk
 loaded_model = pickle.load(open(filename, 'rb'))
+y_pred = loaded_model.predict(x_test)
+print("Predictons from loaded model: ")
+print(y_pred)
 result = loaded_model.score(x_test, y_test)
 print(result)
