@@ -45,17 +45,22 @@ print("R2 of the model: ")
 print(r2_score(y_test, y_prediction))
 
 #cross validate with 5 fold CV
-cv_results = cross_validate(linreg, x_train, y_train, cv=5)
-#print(cv_results)
-print("compared to cross val scores:")
-y_CVprediction = linreg.predict(x_test)
-print("MSE: ")
-print (mean_squared_error(y_test, y_CVprediction))
-print("MAE: ")
-print(mean_absolute_error(y_test, y_CVprediction))
-print("R2 of the model: ")
-print(r2_score(y_test, y_CVprediction))
+cv = cross_validate(linreg, x_train, y_train, cv=5, return_train_score=False, return_estimator=True)
+print(cv)
 
+#Residual Plot --> check for normality, residuals should be balanced on each side, ideally normally distributed
+
+# a, *cv['estimator'] = cv['estimator']
+# cv_estimator = LinearRegression(a)
+
+# print("compared to cross val scores:")
+# y_CVprediction = cv_estimator.predict(x_test)
+# print("MSE: ")
+# print (mean_squared_error(y_test, y_CVprediction))
+# print("MAE: ")
+# print(mean_absolute_error(y_test, y_CVprediction))
+# print("R2 of the model: ")
+# print(r2_score(y_test, y_CVprediction))
 
 # #standardize the data
 # scaler = preprocessing.StandardScaler().fit(x_train)
