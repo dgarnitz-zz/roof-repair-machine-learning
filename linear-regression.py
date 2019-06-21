@@ -49,6 +49,8 @@ cv = cross_validate(linreg, x_train, y_train, cv=5, return_train_score=False, re
 print(cv)
 
 #Residual Plot --> check for normality, residuals should be balanced on each side, ideally normally distributed
+                    # want to underestimate as often as you overestimate
+                    # want to overestimate by the same amount as you underestimate
 
 # a, *cv['estimator'] = cv['estimator']
 # cv_estimator = LinearRegression(a)
