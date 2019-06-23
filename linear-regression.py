@@ -50,7 +50,8 @@ print(cv)
                     # does not make sense to do this for one hot encoded data
 
 sns.set(style="whitegrid")
-sns.residplot(x_train[:, 0], y_train, lowess=True, color="g")
+sns.residplot(y_prediction, y_test, lowess=True, color="g")
+plt.title("Residuals")
 plt.show()
 
 # save the model to disk
