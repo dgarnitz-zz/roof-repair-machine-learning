@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 data = pd.read_excel('./regression-training-data/PriceData.xlsx', sheet_name='SeasonalData', header=None)
 
 #extract data 
-X = data.iloc[1:,2:14]
+X = data.iloc[1:,2:15]
 y = data.iloc[1:,0]
 
 #remove the training set 
@@ -49,11 +49,11 @@ print(cv)
                     # want to overestimate by the same amount as you underestimate
                     # does not make sense to do this for one hot encoded data
 
-sns.set(style="whitegrid")
-sns.residplot(y_prediction, y_test, lowess=True, color="g")
-plt.title("Residuals")
-plt.show()
+# sns.set(style="whitegrid")
+# sns.residplot(y_prediction, y_test, lowess=True, color="g")
+# plt.title("Residuals")
+# plt.show()
 
-# save the model to disk
+# # save the model to disk
 # with open('../API/price-predict/lin-reg.sav', 'wb') as path:
 #     pickle.dump(linreg, path)
