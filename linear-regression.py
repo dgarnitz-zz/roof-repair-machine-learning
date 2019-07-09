@@ -17,7 +17,7 @@ X = data.iloc[1:,2:15]
 y = data.iloc[1:,0]
 
 #remove the training set 
-x_train, x_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 100) 
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 110) 
 
 #initialize the model
 linreg = LinearRegression()
@@ -54,6 +54,12 @@ print(cv)
 # plt.title("Residuals")
 # plt.show()
 
-# # save the model to disk
-# with open('../API/price-predict/lin-reg.sav', 'wb') as path:
-#     pickle.dump(linreg, path)
+#test prediction with raw data before saving
+data = [1, 0, 0, 0, 8.21, 3.9, 0, 0, 0, 1, 0, 0, 0]
+data = np.reshape(data, (1, -1))
+print("The price of the contract in GBP per Square Meter is:")
+print(linreg.predict(data))
+
+# save the model to disk
+with open('../API/price-predict/lin-reg.sav', 'wb') as path:
+    pickle.dump(linreg, path)

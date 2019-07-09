@@ -42,3 +42,9 @@ print(r2_score(y_test, y_prediction))
 #cross validate with 5 fold CV
 cv = cross_validate(rf, x_train, y_train, cv=5, return_train_score=False, return_estimator=True)
 print(cv)
+
+#test prediction with raw data before saving
+data = [1, 0, 0, 0, 8.21, 3.9, 0, 0, 0, 1, 0, 0, 0]
+data = np.reshape(data, (1, -1))
+print("The price of the contract in GBP per Square Meter is:")
+print(rf.predict(data))

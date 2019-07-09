@@ -21,8 +21,8 @@ from glob import glob
 IMAGE_SIZE = [200, 200] 
 
 # training config:
-epochs = 5
-batch_size = 4
+epochs = 50
+batch_size = 20
 
 #set paths to training and validation data
 train_path = './images/training'
@@ -158,3 +158,6 @@ plt.savefig('myfilename111.png')
 # from util import plot_confusion_matrix
 # plot_confusion_matrix(cm, labels, title='Train confusion matrix')
 # plot_confusion_matrix(valid_cm, labels, title='Validation confusion matrix')
+
+# # save the model to disk
+# model.save('../../API/material-classifier/ResNet50.h5')

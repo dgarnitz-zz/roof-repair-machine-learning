@@ -17,7 +17,7 @@ X = data.iloc[1:,2:15]
 y = data.iloc[1:,0]
 
 #remove the training set 
-x_train, x_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 100) 
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 44) 
 
 #initialize the model
         #sklearn documentation recommends this solver for small datasets
@@ -46,12 +46,18 @@ print(r2_score(y_test, y_prediction))
 cv = cross_validate(mlp, x_train, y_train, cv=5, return_train_score=False)
 print(cv)
 
-#Residual Plot 
-sns.set(style="whitegrid")
-sns.residplot(y_prediction, y_test, lowess=True, color="g")
-plt.title("Residuals")
-plt.show()
+# #Residual Plot 
+# sns.set(style="whitegrid")
+# sns.residplot(y_prediction, y_test, lowess=True, color="g")
+# plt.title("Residuals")
+# plt.show()
 
-# save the model to disk
-with open('../API/price-predict/neuralnet.sav', 'wb') as path:
-    pickle.dump(mlp, path)
+#test prediction with raw data before saving
+data = [1, 0, 0, 0, 8, 4, 0, 0, 0, 0, 1, 0, 0]
+data = np.reshape(data, (1, -1))
+print("The price of the contract in GBP per Square Meter is:")
+print(mlp.predict(data))
+
+# # save the model to disk
+# with open('../API/price-predict/neuralnet.sav', 'wb') as path:
+#     pickle.dump(mlp, path)
