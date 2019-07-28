@@ -20,9 +20,9 @@ from glob import glob
 # re-size all the images to this
 IMAGE_SIZE = [200, 200] 
 
-# training config:
-epochs = 10
-batch_size = 4
+# training config - discovered this as optimal through trial and error
+epochs = 125
+batch_size = 16
 
 #set paths to training and validation data
 train_path = './images/training'
@@ -42,7 +42,7 @@ resnet = ResNet50(input_shape=IMAGE_SIZE + [3], weights='imagenet', include_top=
 for layer in resnet.layers:
   layer.trainable = False
 
-# our layers - you can add more if you want
+# add additional dense layers layers 
 x = Flatten()(resnet.output)
 # x = Dense(1000, activation='relu')(x)
 prediction = Dense(len(folders), activation='softmax')(x)
@@ -146,18 +146,18 @@ plt.plot(r.history['loss'], label='train loss')
 plt.plot(r.history['val_loss'], label='val loss')
 plt.legend()
 #plt.show()
-plt.savefig('loss.png')
+plt.savefig('loss-slopeclass.png')
 
 # accuracies
 plt.plot(r.history['acc'], label='train acc')
 plt.plot(r.history['val_acc'], label='val acc')
 plt.legend()
 #plt.show()
-plt.savefig('accuracies.png')
+plt.savefig('accuracies-slopeclass.png')
 
 # from util import plot_confusion_matrix
 # plot_confusion_matrix(cm, labels, title='Train confusion matrix')
 # plot_confusion_matrix(valid_cm, labels, title='Validation confusion matrix')
 
-# save the model to disk
-# model.save('/cs/home/dag8/Documents/Dissertation/Code/API/material_classifier/ResNet50.h5')
+# # save the model to disk
+# model.save('/cs/home/dag8/Documents/Dissertation/Code/API/slope_classifier/ResNet50.h5')

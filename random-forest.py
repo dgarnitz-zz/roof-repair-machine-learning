@@ -12,7 +12,7 @@ import pickle
 data = pd.read_excel('./regression-training-data/PriceData.xlsx', sheet_name='SeasonalData', header=None)
 
 #extract data 
-X = data.iloc[1:,2:15]
+X = data.iloc[1:,2:16]
 y = data.iloc[1:,0]
 
 #remove the training set 
@@ -21,11 +21,7 @@ x_train, x_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, rando
 #initialize the model
 rf = RandomForestRegressor(n_estimators = 100, criterion='mae')
 
-#standardize the data
-scaler = StandardScaler()
-scaler.fit(x_train)
-x_train = scaler.transform(x_train)
-x_test = scaler.transform(x_test)
+#Do Not standardize the data because its a Random Forest
 
 #train the model
 rf.fit(x_train, y_train)
@@ -44,7 +40,20 @@ cv = cross_validate(rf, x_train, y_train, cv=5, return_train_score=False, return
 print(cv)
 
 #test prediction with raw data before saving
-data = [1, 0, 0, 0, 8.21, 3.9, 0, 0, 0, 1, 0, 0, 0]
+data = [1, 0, 0, 0, 8.21, 3.9, 1, 0, 1, 0, 0, 0, 1, 0] #observed value of 54
 data = np.reshape(data, (1, -1))
+
 print("The price of the contract in GBP per Square Meter is:")
 print(rf.predict(data))
+
+
+# # save the model to disk
+# with open('../API/price-predict/randomforest.sav', 'wb') as path:
+#     pickle.dump(rf, path)
+
+# #load the model
+# with open('/cs/home/dag8/Documents/Dissertation/Code/API/price-predict/randomforest.sav', "rb") as f:
+#      loaded_model = pickle.load(f)
+
+# print("The price of the contract in GBP per Square Meter is:")
+# print(loaded_model.predict(data))

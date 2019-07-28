@@ -13,16 +13,17 @@ import matplotlib.pyplot as plt
 data = pd.read_excel('./regression-training-data/PriceData.xlsx', sheet_name='SeasonalData', header=None)
 
 #extract data 
-X = data.iloc[1:,2:15]
+X = data.iloc[1:,2:16]
 y = data.iloc[1:,0]
 
 #remove the training set 
-x_train, x_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 44) 
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 111) 
 
 #initialize the model
         #sklearn documentation recommends this solver for small datasets
         #https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPRegressor.html
-mlp = MLPRegressor(hidden_layer_sizes=(13,), solver='lbfgs') 
+mlp = MLPRegressor(hidden_layer_sizes=(14,), max_iter=5000) 
+        #I experimented with early stopping - made performance materially worse
 
 #standardize the data
 scaler = StandardScaler()
@@ -53,8 +54,9 @@ print(cv)
 # plt.show()
 
 #test prediction with raw data before saving
-data = [1, 0, 0, 0, 8, 4, 0, 0, 0, 0, 1, 0, 0]
+data = [1, 0, 0, 0, 8.21, 3.9, 0, 0, 1, 0, 0, 0, 1, 0] #observed value of 50
 data = np.reshape(data, (1, -1))
+data = scaler.transform(data)
 print("The price of the contract in GBP per Square Meter is:")
 print(mlp.predict(data))
 

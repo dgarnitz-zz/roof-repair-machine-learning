@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 data = pd.read_excel('./regression-training-data/PriceData.xlsx', sheet_name='SeasonalData', header=None)
 
 #extract data 
-X = data.iloc[1:,2:15]
+X = data.iloc[1:,2:16]
 y = data.iloc[1:,0]
 
 #remove the training set 
@@ -55,11 +55,12 @@ print(cv)
 # plt.show()
 
 #test prediction with raw data before saving
-data = [1, 0, 0, 0, 8.21, 3.9, 0, 0, 0, 1, 0, 0, 0]
+data = [1, 0, 0, 0, 8.21, 3.9, 0, 0, 1, 0, 0, 0, 1, 0] #observed value of 50
 data = np.reshape(data, (1, -1))
+data = scaler.transform(data)
 print("The price of the contract in GBP per Square Meter is:")
 print(linreg.predict(data))
 
-# save the model to disk
-with open('../API/price-predict/lin-reg.sav', 'wb') as path:
-    pickle.dump(linreg, path)
+# # save the model to disk
+# with open('../API/price-predict/lin-reg.sav', 'wb') as path:
+#     pickle.dump(linreg, path)
