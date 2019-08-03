@@ -13,6 +13,7 @@ from keras.preprocessing.image import ImageDataGenerator
 from sklearn.metrics import confusion_matrix
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 from glob import glob
 
@@ -132,32 +133,37 @@ def get_confusion_matrix(data_path, N):
   cm = confusion_matrix(targets, predictions)
   return cm
 
-
+#confusion matrix for training
 cm = get_confusion_matrix(train_path, len(image_files))
 print(cm)
+# sns.heatmap(cm, annot=True, xticklabels=["Normal", "Steep"], yticklabels=["Normal", "Steep"], fmt='.0f')
+# plt.title("Slope Classifier Training Confusion Matrix")
+# plt.savefig("slope-training-confusion-matrix.png")
+
+#confusion matrix for testing
 valid_cm = get_confusion_matrix(valid_path, len(valid_image_files))
 print(valid_cm)
+# sns.heatmap(valid_cm, annot=True, xticklabels=["Normal", "Steep"], yticklabels=["Normal", "Steep"], fmt='.0f')
+# plt.title("Slope Classifier Testing Confusion Matrix")
+# plt.savefig("slope-testing-confusion-matrix.png")
 
 
 # plot the results
 
 # loss
-plt.plot(r.history['loss'], label='train loss')
-plt.plot(r.history['val_loss'], label='val loss')
-plt.legend()
-#plt.show()
-plt.savefig('loss-slopeclass.png')
+# plt.plot(r.history['loss'], label='train loss')
+# plt.plot(r.history['val_loss'], label='val loss')
+# plt.legend()
+# #plt.show()
+# plt.savefig('loss-slopeclass.png')
 
 # accuracies
-plt.plot(r.history['acc'], label='train acc')
-plt.plot(r.history['val_acc'], label='val acc')
-plt.legend()
-#plt.show()
-plt.savefig('accuracies-slopeclass.png')
+# plt.plot(r.history['acc'], label='train acc')
+# plt.plot(r.history['val_acc'], label='val acc')
+# plt.legend()
+# #plt.show()
+# plt.savefig('accuracies-slopeclass.png')
 
-# from util import plot_confusion_matrix
-# plot_confusion_matrix(cm, labels, title='Train confusion matrix')
-# plot_confusion_matrix(valid_cm, labels, title='Validation confusion matrix')
 
 # # save the model to disk
 # model.save('/cs/home/dag8/Documents/Dissertation/Code/API/slope_classifier/ResNet50.h5')

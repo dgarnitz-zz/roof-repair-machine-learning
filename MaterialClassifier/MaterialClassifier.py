@@ -13,6 +13,7 @@ from keras.preprocessing.image import ImageDataGenerator
 from sklearn.metrics import confusion_matrix
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 from glob import glob
 
@@ -21,7 +22,7 @@ from glob import glob
 IMAGE_SIZE = [200, 200] 
 
 # training config - discovered this as optimal through trial and error
-epochs = 50
+epochs = 100
 batch_size = 20
 
 #set paths to training and validation data
@@ -132,32 +133,37 @@ def get_confusion_matrix(data_path, N):
   cm = confusion_matrix(targets, predictions)
   return cm
 
-
+#training confusion matrix
 cm = get_confusion_matrix(train_path, len(image_files))
 print(cm)
+# sns.heatmap(cm, annot=True, xticklabels=["Asphalt", "Clay", "Metal", "Wood"], yticklabels=["Asphalt", "Clay", "Metal", "Wood"], fmt='.0f')
+# plt.title("Material Classifier Training Confusion Matrix")
+# plt.savefig("material-training-confusion-matrix.png")
+
+#testing confusion matrix
 valid_cm = get_confusion_matrix(valid_path, len(valid_image_files))
 print(valid_cm)
+# sns.heatmap(valid_cm, annot=True, xticklabels=["Asphalt", "Clay", "Metal", "Wood"], yticklabels=["Asphalt", "Clay", "Metal", "Wood"], fmt='.0f')
+# plt.title("Material Classifier Testing Confusion Matrix")
+# plt.savefig("material-testing-confusion-matrix.png")
 
 
 # plot the results
 
 # loss
-plt.plot(r.history['loss'], label='train loss')
-plt.plot(r.history['val_loss'], label='val loss')
-plt.legend()
-#plt.show()
-plt.savefig('loss-matclass.png')
+# plt.plot(r.history['loss'], label='train loss')
+# plt.plot(r.history['val_loss'], label='val loss')
+# plt.legend()
+# #plt.show()
+# plt.savefig('loss-matclass.png')
 
 # accuracies
-plt.plot(r.history['acc'], label='train acc')
-plt.plot(r.history['val_acc'], label='val acc')
-plt.legend()
-#plt.show()
-plt.savefig('accuracies-matclass.png')
+# plt.plot(r.history['acc'], label='train acc')
+# plt.plot(r.history['val_acc'], label='val acc')
+# plt.legend()
+# #plt.show()
+# plt.savefig('accuracies-matclass.png')
 
-# from util import plot_confusion_matrix
-# plot_confusion_matrix(cm, labels, title='Train confusion matrix')
-# plot_confusion_matrix(valid_cm, labels, title='Validation confusion matrix')
 
 # save the model to disk
 # model.save('/cs/home/dag8/Documents/Dissertation/Code/API/material_classifier/ResNet50.h5')

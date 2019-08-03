@@ -51,7 +51,7 @@ print(cv)
 # sns.set(style="whitegrid")
 # sns.residplot(y_prediction, y_test, lowess=True, color="g")
 # plt.title("Residuals")
-# plt.show()
+# plt.savefig("neuralnet-residuals.png")
 
 #test prediction with raw data before saving
 data = [1, 0, 0, 0, 8.21, 3.9, 0, 0, 1, 0, 0, 0, 1, 0] #observed value of 50

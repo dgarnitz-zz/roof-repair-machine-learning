@@ -6,6 +6,8 @@ from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_validate
 import pickle
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 
 #load data
@@ -38,6 +40,12 @@ print(r2_score(y_test, y_prediction))
 #cross validate with 5 fold CV
 cv = cross_validate(rf, x_train, y_train, cv=5, return_train_score=False, return_estimator=True)
 print(cv)
+
+#Residual Plot 
+sns.set(style="whitegrid")
+sns.residplot(y_prediction, y_test, lowess=True, color="b")
+plt.title("Residuals")
+plt.savefig("randomforest-residuals.png")
 
 #test prediction with raw data before saving
 data = [1, 0, 0, 0, 8.21, 3.9, 1, 0, 1, 0, 0, 0, 1, 0] #observed value of 54

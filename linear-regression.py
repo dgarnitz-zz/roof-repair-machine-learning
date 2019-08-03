@@ -49,10 +49,10 @@ print(cv)
                     # want to overestimate by the same amount as you underestimate
                     # does not make sense to do this for one hot encoded data
 
-# sns.set(style="whitegrid")
-# sns.residplot(y_prediction, y_test, lowess=True, color="g")
-# plt.title("Residuals")
-# plt.show()
+sns.set(style="whitegrid")
+sns.residplot(y_prediction, y_test, lowess=True, color="purple")
+plt.title("Residuals")
+plt.savefig("linearreg-residuals.png")
 
 #test prediction with raw data before saving
 data = [1, 0, 0, 0, 8.21, 3.9, 0, 0, 1, 0, 0, 0, 1, 0] #observed value of 50
