@@ -151,17 +151,21 @@ print(valid_cm)
 # plot the results
 
 # loss
-# plt.plot(r.history['loss'], label='train loss')
-# plt.plot(r.history['val_loss'], label='val loss')
-# plt.legend()
-# #plt.show()
-# plt.savefig('loss-conditionclass.png')
+plt.plot(r.history['loss'], label='train loss')
+plt.plot(r.history['val_loss'], label='val loss')
+plt.legend()
+plt.xlabel('Epochs')
+plt.ylabel('Loss')
+plt.title("Conditional Classifier: Loss vs. Epochs")
+plt.savefig('loss-conditionclass.png')
 
 #accuracies
 # plt.plot(r.history['acc'], label='train acc')
 # plt.plot(r.history['val_acc'], label='val acc')
 # plt.legend()
-# #plt.show()
+# plt.xlabel('Epochs')
+# plt.ylabel('Accuracy')
+# plt.title("Conditional Classifier: Accuracy vs. Epochs")
 # plt.savefig('accuracies-conditionclass.png')
 
 

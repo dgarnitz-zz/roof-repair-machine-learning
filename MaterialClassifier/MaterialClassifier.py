@@ -154,15 +154,19 @@ print(valid_cm)
 # plt.plot(r.history['loss'], label='train loss')
 # plt.plot(r.history['val_loss'], label='val loss')
 # plt.legend()
-# #plt.show()
+# plt.xlabel('Epochs')
+# plt.ylabel('Loss')
+# plt.title("Material Classifier: Loss vs. Epochs")
 # plt.savefig('loss-matclass.png')
 
 # accuracies
-# plt.plot(r.history['acc'], label='train acc')
-# plt.plot(r.history['val_acc'], label='val acc')
-# plt.legend()
-# #plt.show()
-# plt.savefig('accuracies-matclass.png')
+plt.plot(r.history['acc'], label='train acc')
+plt.plot(r.history['val_acc'], label='val acc')
+plt.legend()
+plt.xlabel('Epochs')
+plt.ylabel('Accuracy')
+plt.title("Material Classifier: Accuracy vs. Epochs")
+plt.savefig('accuracies-matclass-1000.png')
 
 
 # save the model to disk

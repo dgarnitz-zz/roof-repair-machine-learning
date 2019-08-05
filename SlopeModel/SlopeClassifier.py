@@ -22,7 +22,7 @@ from glob import glob
 IMAGE_SIZE = [200, 200] 
 
 # training config - discovered this as optimal through trial and error
-epochs = 125
+epochs = 500
 batch_size = 16
 
 #set paths to training and validation data
@@ -151,17 +151,21 @@ print(valid_cm)
 # plot the results
 
 # loss
-# plt.plot(r.history['loss'], label='train loss')
-# plt.plot(r.history['val_loss'], label='val loss')
-# plt.legend()
-# #plt.show()
-# plt.savefig('loss-slopeclass.png')
+plt.plot(r.history['loss'], label='train loss')
+plt.plot(r.history['val_loss'], label='val loss')
+plt.legend()
+plt.xlabel('Epochs')
+plt.ylabel('Loss')
+plt.title("Slope Classifier: Loss vs. Epochs")
+plt.savefig('loss-slopeclass-500.png')
 
 # accuracies
 # plt.plot(r.history['acc'], label='train acc')
 # plt.plot(r.history['val_acc'], label='val acc')
 # plt.legend()
-# #plt.show()
+# plt.xlabel('Epochs')
+# plt.ylabel('Accuracy')
+# plt.title("Slope Classifier: Accuracy vs. Epochs")
 # plt.savefig('accuracies-slopeclass.png')
 
 
