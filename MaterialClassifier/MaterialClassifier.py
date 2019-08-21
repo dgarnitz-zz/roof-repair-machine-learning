@@ -22,7 +22,7 @@ from glob import glob
 IMAGE_SIZE = [200, 200] 
 
 # training config - discovered this as optimal through trial and error
-epochs = 100
+epochs = 500
 batch_size = 20
 
 #set paths to training and validation data
@@ -160,13 +160,13 @@ print(valid_cm)
 # plt.savefig('loss-matclass.png')
 
 # accuracies
-plt.plot(r.history['acc'], label='train acc')
-plt.plot(r.history['val_acc'], label='val acc')
-plt.legend()
-plt.xlabel('Epochs')
-plt.ylabel('Accuracy')
-plt.title("Material Classifier: Accuracy vs. Epochs")
-plt.savefig('accuracies-matclass-1000.png')
+# plt.plot(r.history['acc'], label='train acc')
+# plt.plot(r.history['val_acc'], label='val acc')
+# plt.legend()
+# plt.xlabel('Epochs')
+# plt.ylabel('Accuracy')
+# plt.title("Material Classifier: Accuracy vs. Epochs")
+# plt.savefig('accuracies-matclass.png')
 
 
 # save the model to disk

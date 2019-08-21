@@ -51,7 +51,7 @@ print(cv)
 
 sns.set(style="whitegrid")
 sns.residplot(y_prediction, y_test, lowess=True, color="purple")
-plt.title("Residuals")
+plt.title("Linear Regression Residuals")
 plt.savefig("linearreg-residuals.png")
 
 #test prediction with raw data before saving

@@ -44,7 +44,7 @@ print(cv)
 #Residual Plot 
 sns.set(style="whitegrid")
 sns.residplot(y_prediction, y_test, lowess=True, color="b")
-plt.title("Residuals")
+plt.title("Random Forest Residuals")
 plt.savefig("randomforest-residuals.png")
 
 #test prediction with raw data before saving

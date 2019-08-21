@@ -47,11 +47,11 @@ print(r2_score(y_test, y_prediction))
 cv = cross_validate(mlp, x_train, y_train, cv=5, return_train_score=False)
 print(cv)
 
-# #Residual Plot 
-# sns.set(style="whitegrid")
-# sns.residplot(y_prediction, y_test, lowess=True, color="g")
-# plt.title("Residuals")
-# plt.savefig("neuralnet-residuals.png")
+#Residual Plot 
+sns.set(style="whitegrid")
+sns.residplot(y_prediction, y_test, lowess=True, color="g")
+plt.title("Neural Network Residuals")
+plt.savefig("neuralnet-residuals.png")
 
 #test prediction with raw data before saving
 data = [1, 0, 0, 0, 8.21, 3.9, 0, 0, 1, 0, 0, 0, 1, 0] #observed value of 50
